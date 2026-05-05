@@ -122,14 +122,6 @@ class _AddListingScreenState extends State<AddListingScreen> {
 
             Row(
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () {},
-                  ),
-                ),
-                const SizedBox(width: 10),
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -139,7 +131,9 @@ class _AddListingScreenState extends State<AddListingScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/Add_Estate");
+                    },
                     child: const Text("Next"),
                   ),
                 ),

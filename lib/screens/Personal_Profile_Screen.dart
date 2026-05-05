@@ -23,12 +23,10 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
 
   @override
   Widget build(BuildContext context) {
-    // استخدام watch لضمان إعادة بناء الواجهة عند تغير أي بيانات في الـ Providers
     final auth = context.watch<AuthProvider>();
     final estateProvider = context.watch<EstateProvider>();
     final favProvider = context.watch<FavouriteProvider>();
 
-    // 1. استخراج معرفات عقاراتي (مع معالجة البيانات القادمة من JSON)
     final List<dynamic> rawProperties = auth.currentUser?['my_properties'] ??
         auth.currentUser?['listingProperties'] ?? [];
 
@@ -37,14 +35,11 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
       return p.toString();
     }).where((id) => id.isNotEmpty).toList();
 
-    // 2. جلب العقارات كاملة من الـ Provider بناءً على الـ IDs
     final myProperties = estateProvider.getPropertiesByIds(myPropertiesIds);
     final favList = favProvider.favourites;
 
-    // القائمة التي سيتم عرضها بناءً على التبويب المختار
     final currentList = selectedTab == 0 ? myProperties : favList;
 
-    // مقياس الرسم للتجاوب
     final w = MediaQuery.of(context).size.width;
     final double scale = (w / 375).clamp(0.85, 1.3);
     double r(double s) => s * scale;
@@ -53,7 +48,6 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
       backgroundColor: _bg,
       body: CustomScrollView(
         slivers: [
-          // ── HEADER SECTION ───────────────────────────────────────────
           SliverAppBar(
             expandedHeight: r(240),
             pinned: true,
@@ -66,7 +60,6 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
             ),
           ),
 
-          // ── STATS CARDS ──────────────────────────────────────────────
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.fromLTRB(r(16), r(20), r(16), 0),
@@ -98,7 +91,7 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
                       label: 'Add Property',
                       filled: true,
                       r: r,
-                      onTap: () => Navigator.pushNamed(context, '/Add_Estate'),
+                      onTap: () => Navigator.pushNamed(context, '/add_image'),
                     ),
                   ),
                   SizedBox(width: r(12)),

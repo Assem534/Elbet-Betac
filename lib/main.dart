@@ -16,6 +16,7 @@ import 'package:smart_real_estate/screens/Search_Page.dart';
 import 'package:smart_real_estate/screens/TopAgentPage.dart';
 import 'package:smart_real_estate/screens/addImageProperty.dart';
 import 'package:smart_real_estate/screens/add_estate.dart';
+import 'package:smart_real_estate/screens/chatScreen.dart';
 import 'package:smart_real_estate/screens/loginForm.dart';
 import 'package:smart_real_estate/screens/notification_screen.dart';
 
@@ -55,6 +56,8 @@ class MyApp extends StatelessWidget {
         '/Top_Agent_Page': (context) => Top_Agent_Page(),
         '/My_Profile': (context) =>  Personal_Profile_Screen(),
         '/Review': (context) =>  ReviewScreen(),
+        '/add_image': (context) =>  AddListingScreen(),
+        '/chat_screen': (context) =>  ChatScreen(),
       },
     );
   }

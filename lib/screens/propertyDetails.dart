@@ -153,6 +153,9 @@ class PropertyDetails extends StatelessWidget {
                     title: Text(estate.ownerName ?? "Anderson"),
                     subtitle: Text("Real Estate Agent"),
                     trailing: iconBtn(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/chat_screen");
+                      },
                       Icons.wechat_outlined,
                       color: Colors.green.shade100,
                       iconColor: Colors.green,

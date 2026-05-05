@@ -1,0 +1,13 @@
+{
+  "name": "smart-real-estate-server",
+  "version": "1.0.0",
+  "description": "Local JSON Server for Smart Real Estate App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "json-server": "^0.17.4"
+  }
+}

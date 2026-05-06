@@ -13,12 +13,10 @@ class EstateCard2D extends StatelessWidget {
   const EstateCard2D({
     super.key,
     required this.item,
-    // تم إزالة المعاملات الزائدة لأننا نجلبها عبر context لضمان التحديث التلقائي
   });
 
   @override
   Widget build(BuildContext context) {
-    // نراقب حالة المفضلة لهذا العنصر تحديداً
     final isFav = context.select<FavouriteProvider, bool>(
           (fav) => fav.isFavourite(item),
     );
@@ -26,7 +24,6 @@ class EstateCard2D extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(r(25, context)),
       onTap: () {
-        // 🟢 الانتقال لصفحة التفاصيل عند الضغط على الكارد
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -42,7 +39,6 @@ class EstateCard2D extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 🖼️ IMAGE SECTION
             Expanded(
               child: Stack(
                 children: [
@@ -53,7 +49,6 @@ class EstateCard2D extends StatelessWidget {
                     ),
                   ),
 
-                  // ❤️ FAVORITE BUTTON
                   Positioned(
                     top: r(10, context),
                     right: r(10, context),
@@ -63,7 +58,6 @@ class EstateCard2D extends StatelessWidget {
                         final favProvider = context.read<FavouriteProvider>();
                         final estateProvider = context.read<EstateProvider>();
 
-                        // تبديل حالة المفضلة
                         favProvider.toggleFavourite(
                           item,
                           authProvider.userId,
@@ -96,7 +90,6 @@ class EstateCard2D extends StatelessWidget {
                     ),
                   ),
 
-                  // 💰 PRICE TAG
                   Positioned(
                     bottom: r(10, context),
                     right: r(10, context),
@@ -123,7 +116,6 @@ class EstateCard2D extends StatelessWidget {
               ),
             ),
 
-            // 📝 INFO SECTION
             Padding(
               padding: EdgeInsets.all(r(12, context)),
               child: Column(

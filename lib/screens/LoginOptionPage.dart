@@ -19,14 +19,12 @@ class LoginOptionPage extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       body: Column(
             children: [
-              // 🔹 MAIN CONTAINER
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(r(12)),
                   decoration: BoxDecoration(color: Colors.white),
                   child: Column(
                     children: [
-                      // 🔹 GRID (takes flexible space)
                       Expanded(
                         flex: 4,
                         child: GridView.builder(
@@ -52,7 +50,6 @@ class LoginOptionPage extends StatelessWidget {
 
                       SizedBox(height: r(15)),
 
-                      // 🔹 TITLE
                       Text(
                         "Ready to explore?",
                         style: TextStyle(
@@ -64,7 +61,6 @@ class LoginOptionPage extends StatelessWidget {
 
                       SizedBox(height: r(15)),
 
-                      // 🔹 EMAIL BUTTON
                       SizedBox(
                         width: double.infinity,
                         height: r(50),
@@ -94,7 +90,6 @@ class LoginOptionPage extends StatelessWidget {
 
                       SizedBox(height: r(10)),
 
-                      // 🔹 SOCIAL BUTTONS
                       Row(
                         children: [
                           buildSocialButton("assets/images/google.png", r),
@@ -105,7 +100,6 @@ class LoginOptionPage extends StatelessWidget {
 
                       SizedBox(height: r(15)),
 
-                      // 🔹 REGISTER
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -137,7 +131,7 @@ class LoginOptionPage extends StatelessWidget {
     );
   }
 
-  // 🔹 SOCIAL BUTTON
+
   Widget buildSocialButton(String url, double Function(double) r) {
     return Expanded(
       child: SizedBox(

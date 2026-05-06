@@ -36,7 +36,6 @@ class _FeatureListState extends State<FeatureList> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🔹 TOP NAV
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -45,7 +44,6 @@ class _FeatureListState extends State<FeatureList> {
                   ],
                 ),
 
-                // 🔹 GALLERY (Clickable Images)
                 GestureDetector(
                   onTap: () => print("Open Full Gallery"),
                   child: SizedBox(
@@ -75,7 +73,6 @@ class _FeatureListState extends State<FeatureList> {
 
                 SizedBox(height: r(20, context)),
 
-                // 🔹 SEARCH BAR (Functional)
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: r(15, context)),
                   decoration: BoxDecoration(color: const Color(0xFFF5F4F8), borderRadius: BorderRadius.circular(r(20, context))),
@@ -95,7 +92,6 @@ class _FeatureListState extends State<FeatureList> {
 
                 SizedBox(height: r(25, context)),
 
-                // 🔹 GRID
                 data.isEmpty
                     ? Center(child: Text("No estates found"))
                     : GridView.builder(

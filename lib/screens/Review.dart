@@ -15,14 +15,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Get the estate from arguments
     final estate = ModalRoute.of(context)!.settings.arguments as Estate;
 
-    // 2. Get reviews from provider
     final estateProvider = context.watch<EstateProvider>();
     final allReviews = estateProvider.getReviewsForProperty(estate.id.toString());
 
-    // 3. Filter reviews based on star selection
     final filteredReviews = selectedFilter == "All"
         ? allReviews
         : allReviews.where((r) => r.rating.toInt().toString() == selectedFilter).toList();
@@ -41,10 +38,9 @@ class _ReviewScreenState extends State<ReviewScreen> {
       ),
       body: Column(
         children: [
-          // ─── Property Mini Card ───
           _buildPropertyHeader(estate),
 
-          // ─── Star Filters ───
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
             child: SingleChildScrollView(
@@ -57,7 +53,6 @@ class _ReviewScreenState extends State<ReviewScreen> {
             ),
           ),
 
-          // ─── Reviews List ───
           Expanded(
             child: filteredReviews.isEmpty
                 ? const Center(child: Text("No reviews found for this rating"))

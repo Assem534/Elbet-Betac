@@ -10,7 +10,6 @@ class FavouritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // الاستماع للتغييرات في الـ Provider
     final favProvider = context.watch<FavouriteProvider>();
     final estates = favProvider.favourites;
 
@@ -23,7 +22,6 @@ class FavouritePage extends StatelessWidget {
           padding: EdgeInsets.all(size.width * 0.04),
           child: Column(
             children: [
-              // 🔥 HEADER (نفس ستايلك الأصلي)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -62,7 +60,6 @@ class FavouritePage extends StatelessWidget {
 
               SizedBox(height: size.height * 0.02),
 
-              // 🔥 LIST (التصميم الأصلي)
               Expanded(
                 child: estates.isEmpty
                     ? const Center(
@@ -77,7 +74,6 @@ class FavouritePage extends StatelessWidget {
                     final item = estates[index];
 
                     return Dismissible(
-                      // نستخدم الاسم كـ Key لضمان حذف العنصر الصحيح
                       key: ValueKey(item.name),
                       direction: DismissDirection.endToStart,
                       background: Container(
@@ -98,7 +94,6 @@ class FavouritePage extends StatelessWidget {
                         final favs = context.read<FavouriteProvider>();
                         final estates = context.read<EstateProvider>();
 
-                        // بمجرد الضغط، سيقوم الـ Provider بحذفه من القائمة وتختفي الـ Card تلقائياً
                         favs.toggleFavourite(item, auth.userId, estates);
                       },
                       child: Container(
@@ -110,7 +105,6 @@ class FavouritePage extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            // 🖼 IMAGE
                             SizedBox(
                               width: 120,
                               height: 120,
@@ -124,7 +118,6 @@ class FavouritePage extends StatelessWidget {
                             ),
                             const SizedBox(width: 10),
 
-                            // 📄 INFO
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

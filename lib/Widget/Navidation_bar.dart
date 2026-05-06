@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 Widget Bottom_Navigation_Bar(BuildContext context, int currentIndex) {
   return BottomNavigationBar(
-    type: BottomNavigationBarType.fixed, // Keeps icons centered if labels are hidden
+    type: BottomNavigationBarType.fixed,
     currentIndex: currentIndex,
-    selectedItemColor: Colors.blue[900], // Color for the active icon
-    unselectedItemColor: Colors.grey,    // Color for inactive icons
-    showSelectedLabels: false,           // Hides labels to keep it clean
+    selectedItemColor: Colors.blue[900],
+    unselectedItemColor: Colors.grey,
+    showSelectedLabels: false,
     showUnselectedLabels: false,
     onTap: (value) {
-      // Prevent reloading the same page
       if (value == currentIndex) return;
 
       switch (value) {
@@ -23,7 +22,7 @@ Widget Bottom_Navigation_Bar(BuildContext context, int currentIndex) {
           Navigator.pushNamed(context, "/Favourite_Page");
           break;
         case 3:
-          Navigator.pushNamed(context, "/My_Profile"); // Assuming 3 is Profile
+          Navigator.pushNamed(context, "/My_Profile");
           break;
       }
     },

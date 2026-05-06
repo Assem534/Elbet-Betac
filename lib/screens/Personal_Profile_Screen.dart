@@ -79,7 +79,6 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
             ),
           ),
 
-          // ── ACTION BUTTONS ───────────────────────────────────────────
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.fromLTRB(r(16), r(20), r(16), 0),
@@ -109,7 +108,6 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
             ),
           ),
 
-          // ── TAB BAR ──────────────────────────────────────────────────
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.fromLTRB(r(16), r(24), r(16), r(12)),
@@ -129,7 +127,6 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
             ),
           ),
 
-          // ── GRID DISPLAY ─────────────────────────────────────────────
           currentList.isEmpty
               ? _buildEmptyState(r)
               : SliverPadding(
@@ -153,7 +150,6 @@ class _Personal_Profile_ScreenState extends State<Personal_Profile_Screen> {
     );
   }
 
-  // --- مكونات واجهة المستخدم الفرعية ---
 
   Widget _buildBackButton(BuildContext context, double Function(double) r) {
     return Padding(

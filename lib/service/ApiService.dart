@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_real_estate/models/PricePrediction.dart';
+import 'package:smart_real_estate/models/PropertyPredictRequest.dart';
+import 'package:smart_real_estate/models/estate_request.dart';
 
 const String _jsonServerUrl = 'http://10.0.2.2:3000';
 const String _bayutApiUrl = 'http://10.0.2.2:8000';
@@ -26,7 +29,6 @@ class ApiService {
   }
 
   static Future<void> addEstate(Map<String, dynamic> estateData) async {
-    // Use properties to match your data.json key
     final url = Uri.parse('$_jsonServerUrl/properties');
 
     try {
@@ -127,9 +129,8 @@ class ApiService {
     throw Exception('Failed to load reviews');
   }
 
-  // ── BAYUT ML PRICE PREDICTION ──────────────────────────────────────────
   static Future<PricePrediction> predictPrice(
-    PropertyPredictRequest req,
+      PropertyPredictRequest req,
   ) async {
     final res = await http.post(
       Uri.parse('$_bayutApiUrl/predict'),
@@ -152,92 +153,4 @@ class ApiService {
   }
 }
 
-class PropertyPredictRequest {
-  final double area;
-  final int rooms;
-  final int baths;
-  final String province;
-  final String city;
-  final String propertyType;
-  final String furnishingStatus;
-  final String completionStatus;
-  final bool hasSwimmingPool, hasGym, hasCoveredParking, hasGarden;
-  final bool hasSecurity, hasBalcony, hasJacuzzi, hasSauna, hasCctv;
-  final double lat, lng;
 
-  PropertyPredictRequest({
-    required this.area,
-    required this.rooms,
-    required this.baths,
-    required this.province,
-    required this.city,
-    required this.propertyType,
-    this.furnishingStatus = 'unfurnished',
-    this.completionStatus = 'completed',
-    this.hasSwimmingPool = false,
-    this.hasGym = false,
-    this.hasCoveredParking = false,
-    this.hasGarden = false,
-    this.hasSecurity = false,
-    this.hasBalcony = false,
-    this.hasJacuzzi = false,
-    this.hasSauna = false,
-    this.hasCctv = false,
-    this.lat = 30.0,
-    this.lng = 31.0,
-  });
-
-  Map<String, dynamic> toJson() => {
-    'area': area,
-    'rooms': rooms,
-    'baths': baths,
-    'province': province,
-    'city': city,
-    'property_type': propertyType,
-    'furnishing_status': furnishingStatus,
-    'completion_status': completionStatus,
-    'has_swimming_pool': hasSwimmingPool,
-    'has_gym': hasGym,
-    'has_covered_parking': hasCoveredParking,
-    'has_garden': hasGarden,
-    'has_security': hasSecurity,
-    'has_balcony': hasBalcony,
-    'has_jacuzzi': hasJacuzzi,
-    'has_sauna': hasSauna,
-    'has_cctv': hasCctv,
-    'lat': lat,
-    'lng': lng,
-  };
-}
-
-class PricePrediction {
-  final int predictedPrice, priceRangeLow, priceRangeHigh;
-  final String currency, confidence;
-
-  PricePrediction({
-    required this.predictedPrice,
-    required this.priceRangeLow,
-    required this.priceRangeHigh,
-    required this.currency,
-    required this.confidence,
-  });
-
-  factory PricePrediction.fromJson(Map<String, dynamic> j) => PricePrediction(
-    predictedPrice: j['predicted_price'] as int,
-    priceRangeLow: j['price_range_low'] as int,
-    priceRangeHigh: j['price_range_high'] as int,
-    currency: j['currency'] as String,
-    confidence: j['confidence'] as String,
-  );
-
-  String _fmt(int n) {
-    if (n >= 1000000) return '${(n / 1000000).toStringAsFixed(1)}M';
-    if (n >= 1000) return '${(n / 1000).toStringAsFixed(0)}K';
-    return n.toString();
-  }
-
-  String get formattedPrice => _fmt(predictedPrice);
-
-  String get formattedRange =>
-      '${_fmt(priceRangeLow)} – ${_fmt(priceRangeHigh)} $currency';
-}

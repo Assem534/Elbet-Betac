@@ -17,18 +17,15 @@ class FavouriteProvider extends ChangeNotifier {
     final isExist = _favourites.any((item) => item.id == estate.id);
 
     if (isExist) {
-      // 1. الحذف من القائمة المحلية
       _favourites.removeWhere((item) => item.id == estate.id);
       estateProvider.setFavoriteStatus(estate, false);
     } else {
-      // 2. الإضافة للقائمة المحلية
       _favourites.add(estate);
       estateProvider.setFavoriteStatus(estate, true);
     }
 
     notifyListeners();
 
-    // 3. تحديث السيرفر (نرسل مصفوفة الـ IDs فقط)
     try {
       List<String> favIds = _favourites.map((e) => e.id).toList();
       await ApiService.updateFavorites(userId, favIds);
@@ -61,7 +58,6 @@ class FavouriteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // inside favourite_provider.dart
 
   Future<void> clearAll(EstateProvider estateProvider, String userId) async {
     _favourites.clear();

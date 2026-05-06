@@ -24,7 +24,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    // نستخدم listen: true (الافتراضي مع watch) لتحديث الصفحة عند تغير نتائج البحث
     final estateProvider = context.watch<EstateProvider>();
     final resultsList = estateProvider.estates;
 
@@ -44,9 +43,8 @@ class _SearchPageState extends State<SearchPage> {
         ),
         centerTitle: true,
       ),
-      body: Column( // قمنا بإزالة SingleChildScrollView واستبداله بـ Expanded للـ Grid لتحسين الأداء
+      body: Column(
         children: [
-          // 🔍 حقل البحث
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
@@ -79,7 +77,6 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
 
-          // 📊 إحصائيات البحث
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -93,7 +90,6 @@ class _SearchPageState extends State<SearchPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // أيقونة لفلترة النتائج مستقبلاً
                 const Icon(Icons.tune, color: Color(0xFF252B5C)),
               ],
             ),
@@ -101,8 +97,7 @@ class _SearchPageState extends State<SearchPage> {
 
           const SizedBox(height: 15),
 
-          // 🏗️ شبكة عرض النتائج (Grid)
-          Expanded( // التغيير هنا لضمان عمل الـ Grid بشكل سليم مع التمرير
+          Expanded(
             child: resultsList.isEmpty
                 ? _buildEmptyState()
                 : GridView.builder(
@@ -115,7 +110,6 @@ class _SearchPageState extends State<SearchPage> {
                 childAspectRatio: 0.72,
               ),
               itemBuilder: (context, i) {
-                // نمرر الـ item فقط كما هو محدد في الـ Constructor الجديد لـ EstateCard2D
                 return EstateCard2D(item: resultsList[i]);
               },
             ),

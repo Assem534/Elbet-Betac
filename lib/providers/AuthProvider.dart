@@ -33,7 +33,6 @@ class AuthProvider extends ChangeNotifier {
       final user = await ApiService.login(email: email, password: password);
       _currentUser = user;
 
-      // CRITICAL: Initialize _userProperties from the server data
       _userProperties = List<String>.from(user['my_properties'] ?? []);
 
       _isLoading = false;
@@ -46,15 +45,14 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
-  // ─── REGISTER ──────────────────────────────────────────────────────────────
+
+  //register
 
   Future<bool> register(String name, String email, String password) async {
-    // ... same setup code ...
     try {
       final user = await ApiService.register(name: name, email: email, password: password);
       _currentUser = user;
 
-      // Initialize as empty list for new users
       _userProperties = List<String>.from(user['my_properties'] ?? []);
 
       _isLoading = false;
@@ -68,7 +66,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── LOGOUT ────────────────────────────────────────────────────────────────
 
   void logout() {
     _currentUser = null;

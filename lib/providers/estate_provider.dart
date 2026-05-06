@@ -6,10 +6,8 @@ import '../service/ApiService.dart';
 import 'favourite_provider.dart';
 
 class EstateProvider extends ChangeNotifier {
-// inside EstateProvider class
-  List<Estate> _allEstates = []; // This already exists in your code
+  List<Estate> _allEstates = [];
 
-  List<Map<String, dynamic>> _rawPropertiesJson = [];
   List<Estate> _filteredEstates = [];
   String _searchQuery = '';
   bool _isLoading = false;
@@ -36,9 +34,7 @@ class EstateProvider extends ChangeNotifier {
         .toList();
   }
 
-// داخل estate_provider.dart
 
-  // estate_provider.dart
   void toggleFavourite(Estate estate, FavouriteProvider favProvider, String userId) {
     favProvider.toggleFavourite(estate, userId, this);
   }
@@ -76,7 +72,6 @@ class EstateProvider extends ChangeNotifier {
 
   List<Map<String, dynamic>> get allProperties => _allProperties;
 
-  // جلب البيانات الأساسية عند تشغيل التطبيق
   Future<void> loadInitialData() async {
     _allProperties = await ApiService.getProperties();
     _allReviews = await ApiService.getReviews();
@@ -109,7 +104,6 @@ class EstateProvider extends ChangeNotifier {
 
   List<Estate> getPropertiesByIds(List<String> ids) {
     if (ids.isEmpty) return [];
-    // Set lookup is O(1), much faster than nested loops for large lists
     final idSet = ids.toSet();
     return _allEstates.where((estate) => idSet.contains(estate.id.toString())).toList();
   }
@@ -119,7 +113,6 @@ class EstateProvider extends ChangeNotifier {
   }
 
   List<Review> getReviewsForProperty(String propertyId) {
-    // Assuming _allReviews is List<Map<String, dynamic>> from your previous code
     return _allReviews
         .where((json) => json['propertyId'].toString() == propertyId)
         .map((json) => Review.fromJson(json))

@@ -70,7 +70,6 @@ class _HomePageState extends State<HomePage> {
             children: [
               SizedBox(height: r(20, context)),
 
-              // 🔹 TOP BAR (Location & Notifications)
               Row(
                 children: [
                   GestureDetector(
@@ -95,7 +94,6 @@ class _HomePageState extends State<HomePage> {
                   const Spacer(),
                   iconActionBtn(Icons.notifications_none, context, "/NotificationScreen"),
                   SizedBox(width: r(10, context)),
-                  // 👤 Profile
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -118,9 +116,8 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: r(20, context)),
 
-              // 🔹 SEARCH BAR (Clickable to Search Page)
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, "/SearchPage"),
+                onTap: () => Navigator.pushNamed(context, "/Search_Page"),
                 child: Container(
                   padding: EdgeInsets.all(r(15, context)),
                   decoration: BoxDecoration(color: const Color(0xFFF5F4F8), borderRadius: BorderRadius.circular(15)),
@@ -136,7 +133,6 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: r(20, context)),
 
-              // 🔹 FEATURED ESTATES
               sectionHeader("Featured Estates", "view all", () => Navigator.pushNamed(context, "/FeatureList")),
               estateCards(
                 estatesList,
@@ -150,7 +146,6 @@ class _HomePageState extends State<HomePage> {
 
               SizedBox(height: r(20, context)),
 
-              // 🔹 TOP AGENTS
               sectionHeader("Top Estate Agent", "explore", () => Navigator.pushNamed(context, "/Top_Agent_Page")),
               top_agent(topAgents, (size) => r(size, context)),
 
@@ -158,7 +153,6 @@ class _HomePageState extends State<HomePage> {
               Text("Explore Nearby Estates", style: TextStyle(fontSize: r(18, context), fontWeight: FontWeight.bold, color: const Color(0xFF252B5C))),
               SizedBox(height: r(15, context)),
 
-              // 🔹 ESTATES GRID
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -179,7 +173,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Widgets مساعدة لتقليل تكرار الكود
   Widget sectionHeader(String title, String btnText, VoidCallback onTap) {
     return Row(
       children: [

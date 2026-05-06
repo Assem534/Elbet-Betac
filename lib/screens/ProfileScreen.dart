@@ -85,7 +85,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             flexibleSpace: FlexibleSpaceBar(background: _buildHeader(r)),
           ),
 
-          // Stats Section
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: r(16), vertical: r(20)),
@@ -105,7 +104,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          // Tab Switcher
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: r(16)),
@@ -122,7 +120,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          // Properties Grid
           SliverPadding(
             padding: EdgeInsets.all(r(16)),
             sliver: currentList.isEmpty
@@ -152,7 +149,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
           ),
-          // Bottom padding
           SliverToBoxAdapter(child: SizedBox(height: r(30))),
         ],
       ),

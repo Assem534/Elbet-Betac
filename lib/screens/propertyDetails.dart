@@ -6,7 +6,7 @@ import '../providers/AuthProvider.dart';
 import '../providers/estate_provider.dart';
 
 class PropertyDetails extends StatelessWidget {
-  final Estate estate; // استقبال بيانات العقار
+  final Estate estate;
 
   const PropertyDetails({super.key, required this.estate});
 
@@ -27,7 +27,6 @@ class PropertyDetails extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // ─── Header Image Section ───
           Stack(
             children: [
               ClipRRect(
@@ -57,7 +56,6 @@ class PropertyDetails extends StatelessWidget {
                         iconBtn(
                           Icons.ios_share,
                           onTap: () {
-                            // منطق المشاركة هنا
                           },
                         ),
                         SizedBox(width: r(10)),
@@ -101,7 +99,6 @@ class PropertyDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ─── Title & Price ───
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -133,11 +130,9 @@ class PropertyDetails extends StatelessWidget {
                 SizedBox(height: r(15)),
                 const Divider(),
 
-                // ─── Agent Card (Clickable) ───
                 card(
                   r: r,
                   onTap: () {
-                    // الانتقال لبروفايل الوكيل
                     if (estate.ownerId != null) {
                       Navigator.pushNamed(
                         context,
@@ -175,7 +170,6 @@ class PropertyDetails extends StatelessWidget {
                 SizedBox(height: r(15)),
                 title("Location & Public Facilities"),
 
-                // ─── Location Card ───
                 card(
                   r: r,
                   child: Column(
@@ -210,7 +204,6 @@ class PropertyDetails extends StatelessWidget {
 
                 SizedBox(height: r(15)),
 
-                // ─── Map Preview (Clickable) ───
                 GestureDetector(
                   onTap: () => print("Opening Full Map"),
                   child: ClipRRect(
@@ -243,7 +236,6 @@ class PropertyDetails extends StatelessWidget {
                 ),
 
                 SizedBox(height: r(15)),
-                // ─── Reviews Header ───
                 Row(
                   children: [
                     Text(
@@ -261,7 +253,7 @@ class PropertyDetails extends StatelessWidget {
                           Navigator.pushNamed(
                             context,
                             "/Review",
-                            arguments: estate, // Pass the estate object
+                            arguments: estate,
                           );
                         },
                         child: const Text("view all"),
@@ -269,7 +261,6 @@ class PropertyDetails extends StatelessWidget {
                   ],
                 ),
 
-                // ─── Reviews List (First 5) ───
                 if (reviews.isEmpty)
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),

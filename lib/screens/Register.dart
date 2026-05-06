@@ -73,7 +73,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Back Button
                 Container(
                   width: r(45),
                   height: r(45),
@@ -100,7 +99,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: r(20)),
 
-                // Name
                 buildField(
                   r,
                   hint: 'Enter your name',
@@ -109,7 +107,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: height * 0.02),
 
-                // Email
                 buildField(
                   r,
                   hint: 'Enter your email',
@@ -119,7 +116,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: r(12)),
 
-                // Password
                 TextField(
                   controller: _passwordController,
                   obscureText: isHidden,
@@ -160,7 +156,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: r(20)),
 
-                // Register Button
                 SizedBox(
                   width: double.infinity,
                   height: r(50),

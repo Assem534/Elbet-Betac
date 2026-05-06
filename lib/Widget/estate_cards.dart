@@ -50,7 +50,6 @@ Widget estateCards(
               ),
               child: Row(
                 children: [
-                  // 🖼️ قسم الصورة
                   SizedBox(
                     width: r(130),
                     child: ClipRRect(
@@ -60,7 +59,6 @@ Widget estateCards(
                         children: [
                           Image.asset(estate.image, fit: BoxFit.cover),
 
-                          // ❤️ زر المفضلة التفاعلي
                           Positioned(
                             top: r(8),
                             left: r(8),
@@ -83,7 +81,6 @@ Widget estateCards(
                             ),
                           ),
 
-                          // 🏷️ التاج (Type)
                           Positioned(
                             bottom: r(8),
                             left: r(8),
@@ -106,7 +103,6 @@ Widget estateCards(
 
                   SizedBox(width: r(12)),
 
-                  // 📊 قسم المعلومات
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +143,6 @@ Widget estateCards(
                           ],
                         ),
                         const Spacer(),
-                        // السعر بتنسيق جميل
                         Text(
                           "\$${context.read<EstateProvider>().formatPrice(estate.price)}",
                           style: TextStyle(

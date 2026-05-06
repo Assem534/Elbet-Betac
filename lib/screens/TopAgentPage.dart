@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Widget/responsive_function.dart';
 import '../providers/Agent_Provider.dart';
-import '../screens/ProfileScreen.dart'; // تأكد من استيراد صفحة البروفايل
+import '../screens/ProfileScreen.dart';
 
 class Top_Agent_Page extends StatelessWidget {
   const Top_Agent_Page({super.key});
@@ -55,7 +55,7 @@ class Top_Agent_Page extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: r(15, context),
                 mainAxisSpacing: r(15, context),
-                childAspectRatio: 0.85, // تعديل النسبة لتناسب التصميم
+                childAspectRatio: 0.85,
               ),
               itemBuilder: (context, i) {
                 final agent = topAgents[i];

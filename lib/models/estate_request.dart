@@ -7,8 +7,6 @@ class Estate {
   String image;
   double rate;
   bool isFav;
-
-  // Extra server fields
   final int? area;
   final int? rooms;
   final int? baths;

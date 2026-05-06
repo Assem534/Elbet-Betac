@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_real_estate/models/PricePrediction.dart';
+import 'package:smart_real_estate/models/PropertyPredictRequest.dart';
 import 'package:smart_real_estate/screens/addImageProperty.dart';
 import '../providers/AuthProvider.dart';
 import '../providers/estate_provider.dart';
 import '../service/ApiService.dart';
 
-// ── CONSTANTS (mirrored from Bayut API /constants) ────────────────────────
 const _provinces = [
   'Cairo',
   'Giza',
@@ -110,8 +111,7 @@ class _AddEstatePageState extends State<AddEstatePage> {
     'CCTV': false,
   };
 
-  // ── State ──
-  int _step = 0; // 0 = details, 1 = amenities, 2 = result
+  int _step = 0;
   bool _predicting = false;
   PricePrediction? _prediction;
   String? _errorMsg;
@@ -126,7 +126,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     super.dispose();
   }
 
-  // Inside _AddEstatePageState class
 
   Future<void> _handlePublish() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -177,27 +176,23 @@ class _AddEstatePageState extends State<AddEstatePage> {
         builder: (context) => const Center(child: CircularProgressIndicator(color: _green)),
       );
 
-      // 1. Add the property to the global list
       await ApiService.addEstate(newProperty);
 
-      // 2. CRITICAL FIX: Get the existing properties first
-      // We spread the existing list [...] and then add the newId
+
       final List<String> updatedListingIds = [
         ...authProvider.userProperties,
         newPropertyId
       ];
 
-      // 3. Update the user on the server with the FULL list
       await ApiService.updateUser(authProvider.userId!, {
         'my_properties': updatedListingIds
       });
 
-      // 4. Update local providers
       authProvider.updateUserProperties(updatedListingIds);
       await estateProvider.loadEstates();
 
       if (mounted) {
-        Navigator.pop(context); // Close loading
+        Navigator.pop(context);
         _showPublishSheet(context, (s) => s);
       }
     } catch (e) {
@@ -287,7 +282,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── TOP BAR ──────────────────────────────────────────────────────────────
   Widget _buildTopBar(double Function(double) r) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: r(20), vertical: r(14)),
@@ -327,7 +321,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── STEP INDICATOR ────────────────────────────────────────────────────────
   Widget _buildStepIndicator(double Function(double) r) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: r(20)),
@@ -356,7 +349,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── STEP 1: Property Details ──────────────────────────────────────────────
   Widget _buildStep1(double Function(double) r) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -413,7 +405,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(16)),
 
-        // Rooms & Baths
         Row(
           children: [
             Expanded(
@@ -449,7 +440,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(12)),
 
-        // City
         _sectionLabel('City', r),
         _dropdownBox(
           value: _city,
@@ -459,7 +449,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(12)),
 
-        // Property Type
         _sectionLabel('Property Type', r),
         _dropdownBox(
           value: _propertyType,
@@ -469,7 +458,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(12)),
 
-        // Furnishing
         _sectionLabel('Furnishing Status', r),
         _segmentRow(
           _furnishing,
@@ -479,7 +467,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(12)),
 
-        // Completion
         _sectionLabel('Completion Status', r),
         _segmentRow(
           _completion,
@@ -508,7 +495,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── STEP 2: Amenities ─────────────────────────────────────────────────────
   Widget _buildStep2(double Function(double) r) {
     final icons = {
       'Swimming Pool': Icons.pool,
@@ -599,7 +585,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── STEP 3: Price Result ──────────────────────────────────────────────────
   Widget _buildStep3(double Function(double) r) {
     if (_prediction == null) return const SizedBox();
 
@@ -612,7 +597,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: r(16)),
-        // Hero price card
         Container(
           width: double.infinity,
           padding: EdgeInsets.all(r(24)),
@@ -710,7 +694,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(12)),
 
-        // PROPERTY NAME INPUT
         _sectionLabel('Property Name', r),
         _inputBox(
           child: TextField(
@@ -725,7 +708,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
         ),
         SizedBox(height: r(16)),
 
-        // MANUAL PRICE INPUT
         _sectionLabel('Your Asking Price (EGP)', r),
         _inputBox(
           child: TextField(
@@ -743,7 +725,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
 
         SizedBox(height: r(24)),
 
-        // Summary card
         Container(
           padding: EdgeInsets.all(r(20)),
           decoration: BoxDecoration(
@@ -797,7 +778,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
 
         SizedBox(height: r(20)),
 
-        // Action buttons
         Row(
           children: [
             Expanded(
@@ -834,7 +814,7 @@ class _AddEstatePageState extends State<AddEstatePage> {
                       ),
                     );
                   } else {
-                    _handlePublish(); // Calls the POST logic
+                    _handlePublish();
                   }
                 },
               ),
@@ -846,7 +826,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── BOTTOM BAR ────────────────────────────────────────────────────────────
   Widget _buildBottomBar(double Function(double) r) {
     if (_step == 2) return const SizedBox.shrink();
     final isLast = _step == 1;
@@ -912,7 +891,7 @@ class _AddEstatePageState extends State<AddEstatePage> {
                   ],
                 )
               : Text(
-                  isLast ? '✨ Get AI Price Estimate' : 'Continue',
+                  isLast ? 'Next' : 'Continue',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -924,7 +903,6 @@ class _AddEstatePageState extends State<AddEstatePage> {
     );
   }
 
-  // ── HELPERS ──────────────────────────────────────────────────────────────
 
   Widget _sectionLabel(String text, double Function(double) r) {
     return Padding(
@@ -1160,7 +1138,7 @@ class _AddEstatePageState extends State<AddEstatePage> {
                       padding: EdgeInsets.symmetric(vertical: r(14)),
                     ),
                     onPressed: () {
-                      Navigator.pop(context); // Close sheet
+                      Navigator.pop(context);
                       setState(() {
                         _step = 0;
                         _prediction = null;

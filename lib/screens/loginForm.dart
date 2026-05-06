@@ -94,7 +94,6 @@ class _LoginFormPageState extends State<LoginFormPage> {
                   ),
                   SizedBox(height: r(25)),
 
-                  // Email
                   buildField(
                     r,
                     hint: 'Email',
@@ -104,7 +103,6 @@ class _LoginFormPageState extends State<LoginFormPage> {
                   ),
                   SizedBox(height: r(15)),
 
-                  // Password
                   TextField(
                     controller: _passwordController,
                     obscureText: isHidden,
@@ -143,7 +141,6 @@ class _LoginFormPageState extends State<LoginFormPage> {
                   ),
                   SizedBox(height: r(20)),
 
-                  // Sign In Button
                   ElevatedButton(
                     onPressed:
                     authProvider.isLoading ? null : _handleLogin,
